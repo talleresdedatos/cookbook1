@@ -1,0 +1,27 @@
+h1:gráficos Gráficos
+h2:conjunto-de-datos-de-ejemplo Conjunto de datos de ejemplo
+h2:la-gramática La gramática
+h3:componentes-de-la-gramática Componentes de la gramática
+h3:un-breve-ejemplo Un breve ejemplo
+h3:ggplot-conciso ggplot conciso
+h3:comparación Comparación
+h2:almacenar-gráfico Almacenar gráfico
+h2:los-cinco-gráficos-nombrados Los cinco gráficos nombrados
+h3:gráfico-de-barras-o-columnas Gráfico de barras o columnas
+h3:gráfico-de-líneas Gráfico de líneas
+h3:histogramas Histogramas
+h3:diagramas-de-caja-o-boxplot Diagramas de caja o boxplot
+h3:diagrama-de-dispersión-o-puntos Diagrama de dispersión o puntos
+h2:personalización-de-las-geometrías Personalización de las geometrías
+h3:color-y-relleno Color y relleno
+h3:tamaño Tamaño
+h3:forma Forma
+h2:etiquetas Etiquetas
+h3:usando-labs-para-títulos Usando  para títulos
+h3:usando-labs-para-los-ejes Usando  para los ejes
+h3:usando-labs-para-caption-y-leyenda Usando  para caption y leyenda
+h3:combinando-todas-las-etiquetas Combinando todas las etiquetas
+h2:temas-theme Temas (theme)
+h3:ggthemes 
+h2:más-allá-de-lo-evidente Más allá de lo evidente
+

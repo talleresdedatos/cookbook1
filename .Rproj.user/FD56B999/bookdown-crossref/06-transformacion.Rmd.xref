@@ -1,0 +1,30 @@
+h1:transformación Transformación
+h2:tibbles Tibbles
+h2:visualizar-datos Visualizar datos
+h2:el-paquete-dplyr El paquete 
+h2:transformación-de-columnas Transformación de columnas
+h3:cambiar-nombre-de-una-columna Cambiar nombre de una columna
+h3:cambiar-nombre-de-varias-columnas Cambiar nombre de varias columnas
+h3:cambiar-posición-de-una-columna Cambiar posición de una columna
+h3:seleccionar-columnas Seleccionar columnas
+h3:remover-columnas Remover columnas
+h3:cambiar-nombres-en-selección Cambiar nombres en selección
+h3:opciones-avanzadas-de-selección Opciones avanzadas de selección
+h4:seleccionar-columnas-en-secuencia Seleccionar columnas en secuencia
+h4:seleccionar-columnas-según-un-patrón Seleccionar columnas según un patrón
+h4:seleccionar-avanzado-simultáneo Seleccionar avanzado simultáneo
+h2:transformación-filas Transformación filas
+h3:obtener-un-subconjunto-de-datos Obtener un subconjunto de datos
+h4:operadores-relacionales Operadores relacionales
+h4:subsetting-basado-en-un-solo-valor Subsetting basado en un solo valor
+h4:subsetting-basado-en-múltiples-valores Subsetting basado en múltiples valores
+h4:operadores-lógicos Operadores lógicos
+h4:y-lógico  (Y lógico)
+h4:o-lógico  (O lógico)
+h4:in 
+h4:no-lógico  (NO lógico)
+h3:organizar-filas-según-sus-valores Organizar filas según sus valores
+h4:organizar-según-los-valores-de-una-columna Organizar según los valores de una columna
+h4:organizar-en-base-a-más-de-una-columna Organizar en base a más de una columna
+h2:lecturas-recomendadas Lecturas recomendadas
+

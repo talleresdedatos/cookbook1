@@ -1,0 +1,16 @@
+h1:importación-de-datos Importación de datos
+h2:paquetes-necesarios Paquetes necesarios
+h2:importación-de-archivos-de-texto Importación de archivos de texto
+h3:cargar-readr Cargar readr
+h3:leer-datos-csv Leer datos csv
+h3:almacenar-datos-importados Almacenar datos importados
+h3:leer-datos-tsv Leer datos TSV
+h3:leer-datos-con-delimitador-arbitrario Leer datos con delimitador arbitrario
+h2:importación-de-archivos-excel Importación de archivos excel
+h2:importación-de-archivos-spss Importación de archivos SPSS
+h2:lectura-de-datos-con-más-argumentos Lectura de datos con más argumentos
+h2:solución Solución
+h2:uso-de-datos-de-paquetes-instalados Uso de datos de paquetes instalados
+h3:revisar-datos-disponibles Revisar datos disponibles
+h2:material-extra Material extra
+

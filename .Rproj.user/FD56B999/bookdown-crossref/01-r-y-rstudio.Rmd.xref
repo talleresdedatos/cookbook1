@@ -1,0 +1,16 @@
+h1:conociendo-R R y el IDE RStudio
+h2:qué-es-r ¿Qué es R?
+h3:r-en-la-terminal R en la terminal
+h3:el-rgui-como-editor El Rgui como editor
+h3:rstudio RStudio
+h2:el-editor-de-código-rstudio El editor de código RStudio
+h3:el-panel-de-edición El panel de edición
+h3:el-panel-de-consola El panel de consola
+h3:el-panel-de-environment El panel de environment
+h3:el-panel-de-apoyo El panel de apoyo
+h2:el-directorio-de-trabajo El directorio de trabajo
+h3:asignar-directorio-de-trabajo-por-defecto Asignar directorio de trabajo por defecto
+h2:proyectos Proyectos
+h3:crear-proyectos Crear proyectos
+h3:usar-un-proyecto Usar un proyecto
+

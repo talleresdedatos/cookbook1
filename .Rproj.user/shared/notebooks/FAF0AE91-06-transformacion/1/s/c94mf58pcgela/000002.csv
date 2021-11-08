@@ -1,0 +1,4 @@
+"0","gapminder %>% "
+"0","    select(pais = country, "
+"0","           anio = year,"
+"0","           poblacion = pop)"

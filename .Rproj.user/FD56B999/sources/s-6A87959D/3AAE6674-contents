@@ -1,0 +1,256 @@
+# Importación de datos
+
+No siempre todos los datos con los que queremos trabajar vienen dentro de un paquete de R. 
+De hecho, la mayoría de veces vamos a querer trabajar con un archivo de datos que está en nuestra computadora. Pueden ser datos que hemos recolectado por nuestra cuenta o que hemos descargado de alguna fuente en internet. 
+
+Estos archivos pueden encontrarse en diferentes formatos, siendo uno de los más populares el de Ms Excel. Otros tipos de archivos que quizás conozcas pueden ser SPSS o Stata.
+
+Los ejemplos asumen que tienes tus datos dentro de una carpeta llamada "data" en tu proyecto.
+
+La data a importar en la práctica se encuentra en una carpeta de [Google Drive](https://drive.google.com/drive/folders/1PStbhj2IXd1dx29QAKhjXzb0C_UNajFB?usp=sharing) para su descarga. No olvides ubicar todos los archivos descargados dentro de la carpeta "data" de tu proyecto. 
+
+Ahora deberías contar con todos estos archivos en tu carpeta "data".
+
+```{r, echo=FALSE}
+data.frame(archivos = dir("data")) |> knitr::kable()
+```
+
+En la carpeta "data" contamos con cinco tipos de archivos:
+
+- \*.txt: Texto separado por un delimitador arbitrario.
+- \*.tsv: Texto separado por tabulaciones
+- \*.csv: Texto separado por comas
+- \*.xlsx: Archivo de Excel
+- \*.SAV: Archivo de SPSS
+
+## Paquetes necesarios
+
+Existen paquetes especializados para cada tipo de datos que deseamos descargar. 
+En esta oportunidad, aprenderemos a usar los siguientes.
+
+- `readr`: Para archivos de texto
+- `readxl`: Para archivos de Excel
+- `haven`: Para archivos de SPSS y Stata
+
+Todos estos paquetes se descagaron cuando instalaste `tidyverse`.
+
+Una característica común de todos los paquetes presentados es que al leer los datos en R, se crean como *tibbles*, un formato de trabajo para datos tabulares que existe sólo en R. Además de ello, sus funciones comparten elementos en su interfaz (API), lo que permite trabajar con distintos tipos de datos realizando cambios mínimos.
+
+## Importación de archivos de texto
+
+### Cargar readr
+
+Para acceder a las funciones de un paquete, siempre debemos primero cargarlo haciendo uso de `library()`.
+
+```{r}
+library(readr)
+```
+
+Alternativamente, podemos cargarlo junto a toda la colección de paquetes del `tidyverse`.
+
+```{r, include=FALSE}
+detach(package:readr)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+La función que nutre el núcleo de `readr` es `read_delim()`. Nos permitirá leer prácticamente todo tipo de archivos de texto siempre y cuando le indiquemos el tipo de delimitador.
+
+Exploremos los archivos de texto en nuestra carpeta "data".
+
+### Leer datos csv
+
+Los archivos de valores separados por comas (**C**omma **S**eparated **V**alues) son de los más utilizados en el mundo del análisis de datos debido a que prácticamente cualquier software puede reconocerlos. 
+
+Son archivos de texto que representan datos tabulares en los que los valores de cada columna están separados por comas.
+
+Para leer estos archivos, usamos la función `read_csv()` del paquete `readr`.
+
+```{r}
+read_csv("data/gapminder_comas.csv")  
+```
+
+
+Al ejecutar el código, obtenemos dos tipos de output. El primero nos indica que la lectura asignó a cada columna cierto tipo de datos. Este tipo de output es un simple mensaje (message).
+
+El segundo output nos indica el objeto obtenido (un tibble), con la cantidad de filas y columnas que contiene. Además, nos brinda las diez primeras filas de la información obtenida, y el nombre y tipo de cada columna. Si este conjunto de datos tuviera más columnas, sólo se nos mostraría la cantidad de columnas que alcances en nuestra ventana. 
+
+### Almacenar datos importados
+
+Si deseamos usar los datos obtenidos para un análisis posterior, como probablemente sea el caso, es necesario almacenar la tabla generada haciendo uso del operador de asignación `<-`. El nombre indicado aparecerá en nuestro panel "Environment".
+
+```{r, echo=TRUE}
+datos_obtenidos_csv <- read_csv("data/gapminder_comas.csv")
+```
+
+Vemos que volvemos a obtener el mensaje, pero esta vez no se nos muestran los datos. Esto sucede porque al asignarle un nombre, le hemos indicado a R que queremos acceder a los datos sólo cuando se lo indiquemos explícitamente. Para hacer ello, simplemente tipeamos el nombre que le asignamos al conjunto de datos.
+
+```{r, echo=TRUE}
+datos_obtenidos_csv
+```
+
+En esta ocasión, sí obtenemos la información contenida en el conjunto de datos, pero no el mensaje. Esto sucede porque los mensajes sólo nos muestran información relevante al momento de ejecutar una función, como lo es `read_csv()`.
+
+### Leer datos TSV
+
+Otra manera de almacenar datos es usando uso de archivos de valores separados por tabulaciones (**T**ab **S**eparated **V**alues)
+
+Para leer estos archivos, hacemos uso de la función `read_tsv()`.
+
+
+```{r, echo=TRUE}
+datos_obtenidos_tsv <- read_tsv("data/gapminder_tabs.tsv")
+```
+
+Nuevamente, la función nos comunica mediante un mensaje qué tipo de columnas ha identificado.
+
+Podemos inspeccionar el contenido de este conjunto de datos del mismo modo anterior.
+
+```{r, echo=TRUE}
+datos_obtenidos_tsv
+```
+
+### Leer datos con delimitador arbitrario
+
+Para archivos de texto con cualquier otro tipo de delimitador, usamos la función `read_delim()`, que además de solicitarnos la ubicación del archivo, nos pide especificar el delimitador que se usó para almacenar los datos.
+
+Por ejemplo, inspeccionemos el archivo "gapminder_comas2.txt"
+
+Vemos que es muy similar a los archivos anteriores, pero en este caso las columnas están separadas por punto y coma. 
+
+Para leer este archivo, hacemos uso de `read_delim()` indicando como separador el caracter adecuado.
+
+```{r, echo=TRUE}
+datos_obtenidos_punto_y_coma <- read_delim("data/gapminder_comas2.txt", delim = ";")
+```
+
+## Importación de archivos excel
+
+Para poder leer datos de excel, vamos a hacer uso del paquete `readxl`. 
+
+Recuerda que para cargar cualquier paquete, especificas su nombre sin comillas dentro de un llamado a la funcion `library()`.
+
+```{r}
+library(readxl)
+```
+
+La función que nos permite leer archivos *.xlsx* es `read_xlsx()`. La usamos igual que en los casos anteriores.
+
+```{r}
+gapminder_excel <- read_xlsx("data/gapminder_excel.xlsx")
+```
+
+```{r}
+gapminder_excel
+```
+
+Alternativamente, podemos usar la función `read_excel()`, que nos da el mismo resultado.
+
+```{r}
+gapminder_excel2 <- read_excel("data/gapminder_excel.xlsx")
+```
+
+```{r}
+gapminder_excel2
+```
+
+
+## Importación de archivos SPSS
+
+Para leer archivos SPSS cargamos el paquete `haven`.
+
+```{r}
+library(haven)
+```
+
+Como la extensión de los archivos es *.sav* podemos leerlos con la función `read_sav()`.
+
+```{r}
+universidades <- read_sav("data/09_UNIVERSIDADES_CARATULA.SAV")
+```
+
+```{r}
+universidades
+```
+
+Alternativamente, podemos usar la función `read_spss()`, que nos da el mismo resultado.
+
+```{r}
+universidades2 <- read_spss("data/09_UNIVERSIDADES_CARATULA.SAV")
+```
+
+```{r}
+universidades2
+```
+
+## Lectura de datos con más argumentos
+
+No siempre los datos estarán de antemano en un formato que nos permita leerlos automáticamente. En algunos casos, será necesario especificar argumentos adicionales al momento de leerlos.
+
+Intentar leer los datos de los archivos excel restantes.
+
+## Solución
+
+Usar los argumentos adicionales:
+
+- `skip`
+- `sheet`
+- `col_names`
+
+
+## Uso de datos de paquetes instalados
+
+### Revisar datos disponibles
+
+Cuando se carga un paquete, el usuario tiene acceso a los set de datos contenidos en él. Podemos obtener un listado de los set de datos contenidos en un paquete usando la función `datasets()` del paquete `vcdExtra`. Si no lo tenemos instalado debemos usar el siguiente código en la consola.
+
+```{r, eval=FALSE}
+install.packages("vcdExtra")
+```
+
+Para usar sus funciones usamos:
+
+```{r, warning=FALSE, message=FALSE}
+library(vcdExtra)
+```
+
+Por ejemplo, para conocer los conjuntos de datos del paquete `ggplot2`:
+
+```{r}
+datasets("ggplot2")
+```
+
+Si ya hemos cargado el paquete, basta con llamar al conjunto de datos usando su nombre.
+
+```{r}
+library(ggplot2)
+```
+
+---
+
+```{r}
+diamonds
+```
+
+---
+
+```{r}
+economics
+```
+
+---
+
+```{r}
+seals
+```
+
+## Material extra
+
+Para aprender más, puedes consultar: 
+
+- R para ciencia de datos. [Capítulo Importación de datos](https://r4ds-en-espaniol.netlify.app/importaci%C3%B3n-de-datos.html)
+- Importing data with RStudio [blog](https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio)
+- Different ways of importing data into R [blog](https://towardsdatascience.com/different-ways-of-importing-data-into-r-2d234e8e0dec)
