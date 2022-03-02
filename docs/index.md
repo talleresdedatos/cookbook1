@@ -1,7 +1,7 @@
 --- 
 title: "Cookbook de análisis de datos básico"
 author: "Samuel Calderon"
-date: "2021-11-08"
+date: "2021-12-01"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

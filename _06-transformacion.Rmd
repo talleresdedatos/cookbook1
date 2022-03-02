@@ -429,6 +429,163 @@ gapminder_subset %>%
     arrange(year, lifeExp)
 ```
 
+
+## Transformación del conjunto de datos
+
+### Crear o modificar variables
+
+Para ello usamos la función `mutate()`
+
+Esta función se usa para modificar las variables de nuestro conjunto de datos, ya sea para transformar una variable existente o para crear una nueva. Debemos identificar dos cosas:
+
+1. El nombre del conjunto de datos
+2. El nombre de la variable objetivo y la operación necesaria para crearla y modificarla.
+
+La operación debe hacerse en una variable existente. Si la variable objetivo ya existe en el conjunto de datos, será sobreescrita.
+
+#### Calcular nueva variable
+
+En `gapminder_subset` contamos con información del PBI per cápita y población. Multiplicando ambas podemos tener el PBI total de un país para determinado año.
+
+```{r}
+gapminder_subset %>% 
+    mutate(pbi_total = pop * gdpPercap)
+```
+
+Ten en cuenta que si la operación retorna un solo valor, este será repetido en todas las filas de esa variable.
+
+```{r}
+gapminder_subset %>% 
+    mutate(maxima_pob = max(pop))
+```
+
+También considera que si usas como nombre de variable objetivo algún nombre de variable que ya existe en tu conjunto de datos, será sobreescrita.
+
+```{r}
+gapminder_subset %>% 
+    mutate(pop = max(pop))
+```
+
+#### Recategorizar variable a dicotómica
+
+Usar `mutate()` y `if_else()`.
+
+Cuando queremos recategorizar una variable de manera dicotómica, podemos usar la función `if_else()`. Sirve para testear una condición, que de ser verdadera asume el primer valor, y en caso contrario el segundo.
+
+Por ejemplo, para traducir el nombre de nuestros continentes.
+
+```{r}
+gapminder_subset %>% 
+    mutate(traduccion = if_else(continent == "Europe", "Europa", "América"))
+```
+
+Si usamos el mismo nombre que el de una variable existente, nuestra variable será sobreescrita con sus nuevos valores.
+
+```{r}
+gapminder_subset %>% 
+    mutate(lifeExp = if_else(lifeExp >= 75, "70 o más", "Menos que 70"))
+```
+
+#### Recategorizar variable con múltiples valores
+
+Usar `mutate()` y `case_when()`.
+
+En estos casos, usamos la función `case_when()` que permite testear múltiples condiciones. Para abarcar las observaciones que no cumplan ninguna condición, se usa el valor `TRUE`.
+
+```{r}
+gapminder_subset %>% 
+    mutate(exp_recat = case_when(lifeExp <= 70 ~ "Menor o igual a 70",
+                                               lifeExp <= 75 ~ "Entre 71 y 75",
+                                               TRUE ~ "Mayor que 75"))
+```
+
+### Obtener tabla de valores de resumen de todo el conjunto de datos
+
+Para esto usamos `summarise()`.
+
+Es una función que nos permite obtener datos resumen de nuestras variables. Algo a tener en cuenta es que al hacer nuestro conjunto de datos sólo retendrá los datos de resumen, obviando la data de la cual fueron obtenidos. Debemos identificar dos cosas:
+
+1. El nombre del conjunto de datos
+2. El nombre de la variable resumen objetivo y la operación necesaria para crearla y/o modificarla.
+
+Algunos valores de resumen que podemos obtener de nuestros datos son los siguientes:
+
+- Recuento: usar `n()` sin especificar ninguna variable. Permite obtener la cantidad de observaciones en nuestros datos.
+- Recuento de únicos: usar `n_distinct(x)` donde `x` representa la variable a resumir
+- Suma: usar `sum(x)` donde `x` representa la variable a resumir
+- Promedio: usar `mean(x)` donde `x` representa la variable a resumir
+- Mediana: usar `median(x)` donde `x` representa la variable a resumir
+- Mínimo: usar `min(x)` donde `x` representa la variable a resumir
+- Máximo: usar `min(x)` donde `x` representa la variable a resumir
+- Máximo: usar `min(x)` donde `x` representa la variable a resumir
+- Rango intercuartil: usar `IQR(x)` donde `x` representa la variable a resumir
+
+#### Calcular un valor de resumen para una variable
+
+Podemos obtener el recuento de observaciones de nuestra tabla si usamos `n()`. Esta función nos devuelve la cantidad de observaciones en nuestros  conjunto de datos. En el mismo código podemos asignarle un nombre a la columna, en este caso le ponemos `recuento`.
+
+```{r summarise_n}
+gapminder_subset %>% 
+    summarise(recuento = n())
+```
+
+#### Calcular múltiples valores de resumen para una variable
+
+Podemos obtener más de una medida en un solo llamado a `summarise()`. Por ejemplo, podemos obtener el promedio y mediana del PBI per cápita. Además, podemos aprovechar para obtener la diferencia entre ambas medidas dentro del mismo llamado.
+
+```{r}
+gapminder_subset %>% 
+    summarise(promedio = mean(gdpPercap), 
+              mediana = median(gdpPercap),
+              diferencia = promedio - mediana)
+```
+
+#### Calcular múltiples valores de resumen para múltiples variables
+
+Podemos obtener más de una medida en un solo llamado a `summarise()`. Para obtener valores de resumen de distintas variables basta con operar en las variables que necesitamos. Por ejemplo, para obtener el promedio del PBI per cápita, la mediana de la población y el máximo de la expectativa de vida:
+
+```{r}
+gapminder_subset %>% 
+    summarise(prom_pbi_percap = mean(gdpPercap), 
+              mediana_pob = median(pop),
+              max_exp = max(lifeExp))
+```
+
+### Obtener tabla de valores de resumen para categorías o grupos
+
+Usar `group_by()` y luego `summarise()`.
+
+La función `group_by()` nos permite seleccionar variables con las que agrupar el resto de nuestros datos. Debemos identificar dos cosas:
+
+1. El nombre del conjunto de datos
+2. Las variables de agrupación
+
+Esto crea un conjunto de datos agrupado que puede ser *pipeado*. Por ejemplo, si queremos agrupar por nombre de país.
+
+```{r}
+gapminder_subset %>% 
+    group_by(country)
+```
+
+En principio, los datos no han sufrido ninguna modificación, pero podemos observar que  ahora además de las filas y columnas, obtenemos los grupos formados.
+
+Aunque es posible utilizar datos agrupados en conjunto con otras funciones de `dplyr()`, usarlos junto con `summarise()` nos demuestra claramente su poder.
+
+#### Calcular un valor de resumen para cada categoría o grupo
+
+Podemos obtener el recuento de observaciones por país si primero agrupamos nuestros datos. 
+
+```{r}
+gapminder_subset %>% 
+    group_by(country) %>% 
+    summarise(recuento = n())
+```
+
+Debido a que sólo contábamos con una variable de agrupación, `summarise()` genera un nuevo *tibble* que ya no está agrupado.
+
+
+
+
 ## Lecturas recomendadas
 
 Esta sesión está basada en el capítulo "Data transformation" del libro [R for Data Science](https://r4ds.had.co.nz/transform.html) escrito por Hadley Wickham (autor del paquete `dplyr`).
