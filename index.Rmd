@@ -15,9 +15,27 @@ biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
 
-# Presentación {-}
+# Presentación {#presentacion .unnumbered}
 
-En elaboración...
+Este *cookbook* busca ser una fuente de consulta rápida para personas que inician el proceso de aprendizaje de R usando RStudio. La idea es tener un conjunto suficientemente grande de ejemplos para que usuarios novatos tengan una idea de lo que es posible hacer con R y no se preocupen por memorizar nombres de funciones sino soluciones a problemas concretos.
+
+## Lo que contiene el libro {#sobre-el-contenido}
+
+Debido a que este libro aspira a ser un material de consulta rápida contendrá sobretodo problemas planteados y una solución al respecto. 
+
+## Lo que NO contiene el libro
+
+El libro no abordará detalles teóricos sobre el código presentado. Asimismo, no se profundizará en temas de estadística o programación.
+
+## ¿Para quién es este libro? {#para-quien .unnumbered}
+
+Recomiendo este libro a tres tipos de personas:
+
+1. Personas que interactúan con R por primera vez, posiblemente en el contexto de una clase de estadística
+2. Docentes que enseñan estadística usando R
+3. Personas que quieren usar R en algún proyecto y necesitan refrescar su memoria sobre lo que es posible hacer.
+
+Para las personas del tipo 1 y 2, recomiendo que el uso del libro se vea acompañado de los videos correspondientes al curso "Análisis exploratorio de datos con R" disponible en Youtube. En el caso de los docentes, recomiendo ver el vídeo "Un problema al enseñar estadística con un software".
 
 ## Autor {-}
 
@@ -55,26 +73,7 @@ Samuel Enrique Calderon Serrano:
 
     -   Elaboración de reportes de análisis de datos usando R Markdown
 
-------------------------------------------------------------------------
 
-Este curso NO enseñará:
-
--   Estadística
--   Programación
--   Excel, SPSS, Stata, etc
-
-## Producto final esperado {-}
-
-Cada participante elaborará un reporte que incluirá:
-
--   Descripción de los conjuntos de datos utilizados
--   Explicación de metodología utilizada
--   Productos de análisis (ránkings, tablas de frecuencia, gráficos, etc)
--   Interpretación de resultados
-
-El reporte usará conjuntos de datos abiertos y será publicado vía web en formato *bookdown*.
-
-Ejemplo: <https://bit.ly/TallerDatos-02>
 
 ## Software requerido {-}
 

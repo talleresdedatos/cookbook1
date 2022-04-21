@@ -1,8 +1,10 @@
 h1:url-your-book-url-like-httpsbookdown.orgyihuibookdown url: your book url like https://bookdown.org/yihui/bookdown
 h1:cover-image-path-to-the-social-sharing-image-like-imagescover.jpg cover-image: path to the social sharing image like images/cover.jpg
-h1:presentación Presentación
+h1:presentacion Presentación
+h2:sobre-el-contenido Lo que contiene el libro
+h2:lo-que-no-contiene-el-libro Lo que NO contiene el libro
+h2:para-quien ¿Para quién es este libro?
 h2:autor Autor
 h2:contenido-del-curso Contenido del curso
-h2:producto-final-esperado Producto final esperado
 h2:software-requerido Software requerido
 

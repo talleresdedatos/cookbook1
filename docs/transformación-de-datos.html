@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="La sección de transformación de datos está basada en los ejemplos presentados en el Cheat Sheet de Data Transformation with dplyr. En este capítulo se trabaja con funciones del paquete dplyr,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -50,7 +50,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/talleresdedatos/cookbook1">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -74,9 +74,9 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># para cargar dplyr y toda la colección del tidyverse</span>
 <span class="co">#&gt; -- Attaching packages ------------------- tidyverse 1.3.1 --</span>
 <span class="co">#&gt; v ggplot2 3.3.5     v purrr   0.3.4</span>
-<span class="co">#&gt; v tibble  3.1.5     v dplyr   1.0.7</span>
-<span class="co">#&gt; v tidyr   1.1.4     v stringr 1.4.0</span>
-<span class="co">#&gt; v readr   2.1.0     v forcats 0.5.1</span>
+<span class="co">#&gt; v tibble  3.1.6     v dplyr   1.0.8</span>
+<span class="co">#&gt; v tidyr   1.2.0     v stringr 1.4.0</span>
+<span class="co">#&gt; v readr   2.1.2     v forcats 0.5.1</span>
 <span class="co">#&gt; -- Conflicts ---------------------- tidyverse_conflicts() --</span>
 <span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
 <span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span></code></pre></div>
@@ -88,12 +88,12 @@
 <span class="header-section-number">6.1</span> Pipes<a class="anchor" aria-label="anchor" href="#pipes"><i class="fas fa-link"></i></a>
 </h2>
 <p>El operador <em>pipe</em> viene integrado en el paquete <code>dplyr</code>. Busca simplificar la manera en que se componen las funciones que trabajan con datos ordenados. Evita la creación de objetos intermedios y permite leer una operación como una historia contada en lenguaje natural.</p>
-<p>En la práctica, convierte el objeto a la izquieda del <code><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></code> en el primer argumento de la función a la derecha.</p>
+<p>En la práctica, convierte el objeto a la izquieda del <code>%&gt;%</code> en el primer argumento de la función a la derecha.</p>
 <p>En lugar de usar <code>f(x)</code> puedo usar <code>x %&gt;% f()</code> para referirme a la misma operación. De este modo, puedo componer una operación más compleja encadenando <em>pipes</em>.</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">%&gt;%</span> 
-    <span class="fu">f</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-    <span class="fu">g</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">f</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu">g</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu">h</span><span class="op">(</span><span class="op">)</span> </code></pre></div>
 <p>Se puede traducir en lenguaje natural a:</p>
 <ol style="list-style-type: decimal">
@@ -148,7 +148,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Puede obtenerse el promedio de <strong>mpg</strong>.</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 1</span>
 <span class="co">#&gt;   promedio</span>
@@ -180,7 +180,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Puede obtenerse el promedio, mediana, rango intercuartil, etc, de <strong>mpg</strong>.</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
               mediana <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
               rango_iq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/IQR.html">IQR</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
@@ -214,7 +214,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Puede obtenerse el promedio y mediana de <strong>mpg</strong> y <strong>hp</strong>.</p>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
               mediana_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
               promedio_hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">hp</span><span class="op">)</span>,
@@ -249,7 +249,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede obtener el recuento de observaciones presentes en la tabla</p>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 1 x 1</span>
 <span class="co">#&gt;       n</span>
@@ -281,7 +281,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede obtener el recuento de observaciones para cada valor de <strong>cyl</strong> presente en la tabla</p>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;     cyl     n</span>
@@ -315,7 +315,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede obtener el recuento de observaciones combinación de <strong>cyl</strong> y <strong>vs</strong> presente en la tabla</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">vs</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;     cyl    vs     n</span>
@@ -357,8 +357,8 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede obtener el promedio de <strong>mpg</strong> para cada valor de <strong>cyl</strong> presente en la tabla</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;     cyl promedio_mpg</span>
@@ -392,8 +392,8 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede obtener el promedio de <strong>mpg</strong> y <strong>hp</strong> para cada valor de <strong>cyl</strong> presente en la tabla</p>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span>,
               promedio_hp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">hp</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 x 3</span>
@@ -428,10 +428,11 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede obtener el promedio de <strong>mpg</strong> para cada combinación de los valores de <strong>cyl</strong> y <strong>vs</strong> presente en la tabla</p>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">vs</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">vs</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; `summarise()` has grouped output by 'cyl'. You can override using the `.groups` argument.</span>
+<span class="co">#&gt; `summarise()` has grouped output by 'cyl'. You can override</span>
+<span class="co">#&gt; using the `.groups` argument.</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt; # Groups:   cyl [3]</span>
 <span class="co">#&gt;     cyl    vs promedio_mpg</span>
@@ -449,10 +450,11 @@
 <p>Usar <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code>.</p>
 <p>La siguiente tabla es el resultado de una agrupación y un cálculo de resumen. Como se usó más de una variable de agrupación, se mantiene agrupada.</p>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">vs</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">vs</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; `summarise()` has grouped output by 'cyl'. You can override using the `.groups` argument.</span>
+<span class="co">#&gt; `summarise()` has grouped output by 'cyl'. You can override</span>
+<span class="co">#&gt; using the `.groups` argument.</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt; # Groups:   cyl [3]</span>
 <span class="co">#&gt;     cyl    vs promedio_mpg</span>
@@ -464,11 +466,12 @@
 <span class="co">#&gt; 5     8     0         15.1</span></code></pre></div>
 <p>Es posible desagruparla de la siguiente manera:</p>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">vs</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span>, <span class="va">vs</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>promedio_mpg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; `summarise()` has grouped output by 'cyl'. You can override using the `.groups` argument.</span>
+<span class="co">#&gt; `summarise()` has grouped output by 'cyl'. You can override</span>
+<span class="co">#&gt; using the `.groups` argument.</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;     cyl    vs promedio_mpg</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;</span>
@@ -508,7 +511,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede filtrar las observaciones cuyo valor de <strong>mpg</strong> sea mayor a 20.</p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 14 x 11</span>
 <span class="co">#&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am</span>
@@ -555,7 +558,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede filtrar las observaciones cuyo valor de <strong>mpg</strong> sea mayor a 20 y menor que 25. La coma (,) dentro de <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> cumple la función de un operador Y lógico (&amp;).</p>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span>, <span class="va">mpg</span> <span class="op">&lt;</span> <span class="fl">25</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 8 x 11</span>
 <span class="co">#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am</span>
@@ -596,7 +599,7 @@
 <span class="co">#&gt; #   carb &lt;dbl&gt;</span></code></pre></div>
 <p>Se puede filtrar las observaciones cuyo valor de <strong>mpg</strong> sea menor a 15 o mayor a 30.</p>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&lt;</span> <span class="fl">15</span> <span class="op">|</span> <span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">30</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 9 x 11</span>
 <span class="co">#&gt;     mpg   cyl  disp    hp  drat    wt  qsec    vs    am</span>
@@ -612,6 +615,13 @@
 <span class="co">#&gt; 9  30.4     4  95.1   113  3.77  1.51  16.9     1     1</span>
 <span class="co">#&gt; # ... with 2 more variables: gear &lt;dbl&gt;, carb &lt;dbl&gt;</span></code></pre></div>
 <p>Para más ejemplos de operaciones lógicas revisa la sección <strong>intertar referencia</strong>.</p>
+</div>
+<div id="remover-observaciones-con-valores-duplicados" class="section level3" number="6.4.4">
+<h3>
+<span class="header-section-number">6.4.4</span> Remover observaciones con valores duplicados<a class="anchor" aria-label="anchor" href="#remover-observaciones-con-valores-duplicados"><i class="fas fa-link"></i></a>
+</h3>
+<p>Usar <code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct()</a></code>.</p>
+<p>A partir de la siguiente tabla</p>
 
 </div>
 </div>
@@ -647,14 +657,15 @@
 <li><a class="nav-link" href="#filtrar-observaciones-que-cumplen-un-criterio"><span class="header-section-number">6.4.1</span> Filtrar observaciones que cumplen un criterio</a></li>
 <li><a class="nav-link" href="#filtrar-observaciones-que-cumplen-m%C3%A1s-de-un-criterio"><span class="header-section-number">6.4.2</span> Filtrar observaciones que cumplen más de un criterio</a></li>
 <li><a class="nav-link" href="#filtrar-observaciones-que-cumplen-un-criterio-u-otro"><span class="header-section-number">6.4.3</span> Filtrar observaciones que cumplen un criterio u otro</a></li>
+<li><a class="nav-link" href="#remover-observaciones-con-valores-duplicados"><span class="header-section-number">6.4.4</span> Remover observaciones con valores duplicados</a></li>
 </ul>
 </li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/06-transformacion2.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/06-transformacion2.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/talleresdedatos/cookbook1/blob/master/06-transformacion2.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/talleresdedatos/cookbook1/edit/master/06-transformacion2.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -666,7 +677,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Cookbook de análisis de datos básico</strong>" was written by Samuel Calderon. It was last built on 2021-12-01.</p>
+    <p>"<strong>Cookbook de análisis de datos básico</strong>" was written by Samuel Calderon. It was last built on 2022-04-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

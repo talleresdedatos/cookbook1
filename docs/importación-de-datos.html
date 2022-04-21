@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="No siempre todos los datos con los que queremos trabajar vienen dentro de un paquete de R. De hecho, la mayoría de veces vamos a querer trabajar con un archivo de datos que está en nuestra...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.0/transition.js"></script><script src="libs/bs3compat-0.3.0/tabs.js"></script><script src="libs/bs3compat-0.3.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -50,7 +50,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/talleresdedatos/cookbook1">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -63,7 +63,7 @@ De hecho, la mayoría de veces vamos a querer trabajar con un archivo de datos q
 <p>Estos archivos pueden encontrarse en diferentes formatos, siendo uno de los más populares el de Ms Excel. Otros tipos de archivos que quizás conozcas pueden ser SPSS o Stata.</p>
 <p>Los ejemplos asumen que tienes tus datos dentro de una carpeta llamada “data” en tu proyecto.</p>
 <p>La data a importar en la práctica se encuentra en una carpeta de <a href="https://drive.google.com/drive/folders/1PStbhj2IXd1dx29QAKhjXzb0C_UNajFB?usp=sharing">Google Drive</a> para su descarga. No olvides ubicar todos los archivos descargados dentro de la carpeta “data” de tu proyecto.</p>
-<p>Ahora deberías contar con todos estos archivos en tu carpeta “data.”</p>
+<p>Ahora deberías contar con todos estos archivos en tu carpeta “data”.</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th align="left">archivos</th>
@@ -145,14 +145,14 @@ En esta oportunidad, aprenderemos a usar los siguientes.</p>
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="co">#&gt; -- Attaching packages ------------------- tidyverse 1.3.1 --</span>
 <span class="co">#&gt; v ggplot2 3.3.5     v purrr   0.3.4</span>
-<span class="co">#&gt; v tibble  3.1.5     v dplyr   1.0.7</span>
-<span class="co">#&gt; v tidyr   1.1.4     v stringr 1.4.0</span>
-<span class="co">#&gt; v readr   2.1.0     v forcats 0.5.1</span>
+<span class="co">#&gt; v tibble  3.1.6     v dplyr   1.0.8</span>
+<span class="co">#&gt; v tidyr   1.2.0     v stringr 1.4.0</span>
+<span class="co">#&gt; v readr   2.1.2     v forcats 0.5.1</span>
 <span class="co">#&gt; -- Conflicts ---------------------- tidyverse_conflicts() --</span>
 <span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
 <span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span></code></pre></div>
 <p>La función que nutre el núcleo de <code>readr</code> es <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim()</a></code>. Nos permitirá leer prácticamente todo tipo de archivos de texto siempre y cuando le indiquemos el tipo de delimitador.</p>
-<p>Exploremos los archivos de texto en nuestra carpeta “data.”</p>
+<p>Exploremos los archivos de texto en nuestra carpeta “data”.</p>
 </div>
 <div id="leer-datos-csv" class="section level3" number="5.2.2">
 <h3>
@@ -192,7 +192,7 @@ En esta oportunidad, aprenderemos a usar los siguientes.</p>
 <h3>
 <span class="header-section-number">5.2.3</span> Almacenar datos importados<a class="anchor" aria-label="anchor" href="#almacenar-datos-importados"><i class="fas fa-link"></i></a>
 </h3>
-<p>Si deseamos usar los datos obtenidos para un análisis posterior, como probablemente sea el caso, es necesario almacenar la tabla generada haciendo uso del operador de asignación <code><a href="https://rdrr.io/r/base/assignOps.html">&lt;-</a></code>. El nombre indicado aparecerá en nuestro panel “Environment.”</p>
+<p>Si deseamos usar los datos obtenidos para un análisis posterior, como probablemente sea el caso, es necesario almacenar la tabla generada haciendo uso del operador de asignación <code>&lt;-</code>. El nombre indicado aparecerá en nuestro panel “Environment”.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">datos_obtenidos_csv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/gapminder_comas.csv"</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 1704 Columns: 6</span>
@@ -531,8 +531,8 @@ En esta oportunidad, aprenderemos a usar los siguientes.</p>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/05-importacion.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/05-importacion.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/talleresdedatos/cookbook1/blob/master/05-importacion.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/talleresdedatos/cookbook1/edit/master/05-importacion.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -544,7 +544,7 @@ En esta oportunidad, aprenderemos a usar los siguientes.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Cookbook de análisis de datos básico</strong>" was written by Samuel Calderon. It was last built on 2021-12-01.</p>
+    <p>"<strong>Cookbook de análisis de datos básico</strong>" was written by Samuel Calderon. It was last built on 2022-04-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
