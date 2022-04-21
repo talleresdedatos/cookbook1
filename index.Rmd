@@ -19,11 +19,11 @@ csl: chicago-fullnote-bibliography.csl
 
 Este *cookbook* busca ser una fuente de consulta rápida para personas que inician el proceso de aprendizaje de R usando RStudio. La idea es tener un conjunto suficientemente grande de ejemplos para que usuarios novatos tengan una idea de lo que es posible hacer con R y no se preocupen por memorizar nombres de funciones sino soluciones a problemas concretos.
 
-## Lo que contiene el libro {#sobre-el-contenido}
+## Lo que contiene el libro {#sobre-el-contenido .unnumbered}
 
 Debido a que este libro aspira a ser un material de consulta rápida contendrá sobretodo problemas planteados y una solución al respecto. 
 
-## Lo que NO contiene el libro
+## Lo que NO contiene el libro {.unnumbered}
 
 El libro no abordará detalles teóricos sobre el código presentado. Asimismo, no se profundizará en temas de estadística o programación.
 
